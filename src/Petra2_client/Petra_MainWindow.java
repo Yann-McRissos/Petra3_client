@@ -53,7 +53,6 @@ public class Petra_MainWindow extends javax.swing.JFrame {
         jRadioButtonConv2 = new javax.swing.JRadioButton();
         jRadioButtonPlongeur = new javax.swing.JRadioButton();
         jRadioButtonVentouse = new javax.swing.JRadioButton();
-        jRadioButtonChariot = new javax.swing.JRadioButton();
         jRadioButtonBras = new javax.swing.JRadioButton();
         jRadioButtonGrappin = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
@@ -67,17 +66,14 @@ public class Petra_MainWindow extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton_Deconnexion = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel2.setText("Capteurs");
 
         jCheckBox2.setText("L2");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
-            }
-        });
 
         jCheckBox3.setText("T");
 
@@ -127,14 +123,6 @@ public class Petra_MainWindow extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(jRadioButtonChariot);
-        jRadioButtonChariot.setText("Chariot");
-        jRadioButtonChariot.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonChariotActionPerformed(evt);
-            }
-        });
-
         buttonGroup1.add(jRadioButtonBras);
         jRadioButtonBras.setText("Bras");
         jRadioButtonBras.addActionListener(new java.awt.event.ActionListener() {
@@ -168,13 +156,14 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 
         jLabel_envoye.setText("[data]");
 
+        jTextField_serverPort.setText("40004");
         jTextField_serverPort.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextField_serverPortFocusLost(evt);
             }
         });
 
-        jTextField_serverIP.setText("10.59.40.64");
+        jTextField_serverIP.setText("192.168.1.75");
         jTextField_serverIP.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextField_serverIPFocusLost(evt);
@@ -191,6 +180,15 @@ public class Petra_MainWindow extends javax.swing.JFrame {
                 jButton_DeconnexionActionPerformed(evt);
             }
         });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Réservoir", "Convoyeur 1", "Bac KO", "Convoyeur 2" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Chariot");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -215,13 +213,21 @@ public class Petra_MainWindow extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jRadioButtonVentouse)
                         .addGap(18, 18, 18)
-                        .addComponent(jRadioButtonChariot)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButtonBras)
-                        .addGap(18, 18, 18)
                         .addComponent(jRadioButtonGrappin)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(15, 15, 15)
+                        .addComponent(jRadioButtonBras)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton_Deconnexion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonConnect, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                        .addGap(36, 36, 36))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -241,39 +247,20 @@ public class Petra_MainWindow extends javax.swing.JFrame {
                                     .addComponent(jLabel_recu)
                                     .addComponent(jLabel_envoye)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
+                                .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextField_serverIP, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField_serverPort, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton_Deconnexion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonConnect))
-                        .addGap(14, 14, 14))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButtonConv1)
-                            .addComponent(jRadioButtonConv2)
-                            .addComponent(jRadioButtonPlongeur)
-                            .addComponent(jRadioButtonVentouse)
-                            .addComponent(jRadioButtonChariot)
-                            .addComponent(jRadioButtonBras)
-                            .addComponent(jRadioButtonGrappin)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCheckBox2)
@@ -291,7 +278,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
                         .addComponent(jCheckBox1)
                         .addGap(18, 18, 18)
                         .addComponent(jCheckBox9)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel_recu)
@@ -299,7 +286,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel_envoye)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField_serverIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -310,16 +297,26 @@ public class Petra_MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonConnect)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_Deconnexion)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                        .addComponent(jButton_Deconnexion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButtonConv1)
+                            .addComponent(jRadioButtonConv2)
+                            .addComponent(jRadioButtonPlongeur)
+                            .addComponent(jRadioButtonVentouse)
+                            .addComponent(jRadioButtonBras)
+                            .addComponent(jRadioButtonGrappin)
+                            .addComponent(jLabel8)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     private void jButtonConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectActionPerformed
         try
@@ -364,7 +361,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
     private void jRadioButtonPlongeurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPlongeurActionPerformed
         try
         {
-            sendMsg(3);
+            sendMsg(4);
         }
         catch(Exception e)
         {
@@ -375,7 +372,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
     private void jRadioButtonVentouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVentouseActionPerformed
         try
         {
-            sendMsg(4);
+            sendMsg(3);
         }
         catch(Exception e)
         {
@@ -383,21 +380,10 @@ public class Petra_MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jRadioButtonVentouseActionPerformed
 
-    private void jRadioButtonChariotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonChariotActionPerformed
-        try
-        {
-            sendMsg(5);
-        }
-        catch(Exception e)
-        {
-            System.err.println("Erreur ! Pas de connexion ? [" + e.getMessage() + "]");
-        }
-    }//GEN-LAST:event_jRadioButtonChariotActionPerformed
-
     private void jRadioButtonBrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonBrasActionPerformed
         try
         {
-            sendMsg(6);
+            sendMsg(5);
         }
         catch(Exception e)
         {
@@ -408,7 +394,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
     private void jRadioButtonGrappinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonGrappinActionPerformed
         try
         {
-            sendMsg(7);
+            sendMsg(6);
         }
         catch(Exception e)
         {
@@ -443,13 +429,35 @@ public class Petra_MainWindow extends javax.swing.JFrame {
     private void jButton_DeconnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_DeconnexionActionPerformed
         try
         {
-            sendMsg(8);
+            sendMsg(0);
         }
         catch(Exception e)
         {
             System.err.println("Erreur ! Pas de connexion ? [" + e.getMessage() + "]");
         }
     }//GEN-LAST:event_jButton_DeconnexionActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        int choice;
+        System.out.println("test");
+        try
+        {
+            buttonGroup1.clearSelection();
+            choice = jComboBox1.getSelectedIndex();
+            System.out.println("Choix: " + choice);
+            switch(choice)
+            {
+                case 0: sendMsg(7); break;
+                case 1: sendMsg(8); break;
+                case 2: sendMsg(9); break;
+                case 3: sendMsg(10); break;
+            }
+        }
+        catch(Exception e)
+        {
+            System.err.println("Erreur ! Pas de connexion ? [" + e.getMessage() + "]");
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     public void sendMsg(int num)
     {
@@ -511,6 +519,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JCheckBox jCheckBox9;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -518,10 +527,10 @@ public class Petra_MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel_envoye;
     private javax.swing.JLabel jLabel_recu;
     private javax.swing.JRadioButton jRadioButtonBras;
-    private javax.swing.JRadioButton jRadioButtonChariot;
     private javax.swing.JRadioButton jRadioButtonConv1;
     private javax.swing.JRadioButton jRadioButtonConv2;
     private javax.swing.JRadioButton jRadioButtonGrappin;
