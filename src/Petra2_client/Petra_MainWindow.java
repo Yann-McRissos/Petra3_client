@@ -27,6 +27,8 @@ public class Petra_MainWindow extends javax.swing.JFrame {
         initComponents();
         this.jLabel_recu.setText("");
         this.jLabel_envoye.setText("");
+        
+        // lancer le thread/bean des capteurs
     }
 
     /**
@@ -39,57 +41,69 @@ public class Petra_MainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jLabel2 = new javax.swing.JLabel();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox9 = new javax.swing.JCheckBox();
-        jLabel3 = new javax.swing.JLabel();
+        jPanel_picture = new javax.swing.JPanel();
+        jLabel_petra = new javax.swing.JLabel();
+        jPanel_actuateurs = new javax.swing.JPanel();
+        jLabel_actuateurs = new javax.swing.JLabel();
         jRadioButtonConv1 = new javax.swing.JRadioButton();
         jRadioButtonConv2 = new javax.swing.JRadioButton();
         jRadioButtonPlongeur = new javax.swing.JRadioButton();
         jRadioButtonVentouse = new javax.swing.JRadioButton();
         jRadioButtonBras = new javax.swing.JRadioButton();
         jRadioButtonGrappin = new javax.swing.JRadioButton();
-        jLabel4 = new javax.swing.JLabel();
-        jButtonConnect = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jPanel_capteurs = new javax.swing.JPanel();
+        jLabel_capteurs = new javax.swing.JLabel();
+        jCheckBox_L1 = new javax.swing.JCheckBox();
+        jCheckBox_L2 = new javax.swing.JCheckBox();
+        jCheckBox_T = new javax.swing.JCheckBox();
+        jCheckBox_S = new javax.swing.JCheckBox();
+        jCheckBox_CS = new javax.swing.JCheckBox();
+        jCheckBox_H = new javax.swing.JCheckBox();
+        jCheckBox_AP = new javax.swing.JCheckBox();
+        jCheckBox_PP = new javax.swing.JCheckBox();
+        jCheckBox_DE = new javax.swing.JCheckBox();
+        jPanel_connection = new javax.swing.JPanel();
+        jLabel_recutext = new javax.swing.JLabel();
+        jLabel_envoyetext = new javax.swing.JLabel();
         jLabel_recu = new javax.swing.JLabel();
         jLabel_envoye = new javax.swing.JLabel();
-        jTextField_serverPort = new javax.swing.JTextField();
-        jTextField_serverIP = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        jTextField_serverIP = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jTextField_serverPort = new javax.swing.JTextField();
+        jButton_connect = new javax.swing.JButton();
         jButton_Deconnexion = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel2.setText("Capteurs");
+        jPanel_picture.setAlignmentY(0.0F);
 
-        jCheckBox2.setText("L2");
+        jLabel_petra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Petra2_client/petra.png"))); // NOI18N
 
-        jCheckBox3.setText("T");
+        javax.swing.GroupLayout jPanel_pictureLayout = new javax.swing.GroupLayout(jPanel_picture);
+        jPanel_picture.setLayout(jPanel_pictureLayout);
+        jPanel_pictureLayout.setHorizontalGroup(
+            jPanel_pictureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 792, Short.MAX_VALUE)
+            .addGroup(jPanel_pictureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel_pictureLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel_petra)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jPanel_pictureLayout.setVerticalGroup(
+            jPanel_pictureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 601, Short.MAX_VALUE)
+            .addGroup(jPanel_pictureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel_pictureLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel_petra)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
 
-        jCheckBox4.setText("S");
-
-        jCheckBox5.setText("CS");
-
-        jCheckBox6.setText("H");
-
-        jCheckBox7.setText("AP");
-
-        jCheckBox1.setText("PP");
-
-        jCheckBox9.setText("DE");
-
-        jLabel3.setText("Actuateurs");
+        jLabel_actuateurs.setText("Actuateurs");
 
         buttonGroup1.add(jRadioButtonConv1);
         jRadioButtonConv1.setText("Convoyeur 1");
@@ -139,47 +153,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Petra2_client/petra.png"))); // NOI18N
-
-        jButtonConnect.setText("Connexion au serveur");
-        jButtonConnect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConnectActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Reçu:");
-
-        jLabel5.setText("Envoyé:");
-
-        jLabel_recu.setText("[data]");
-
-        jLabel_envoye.setText("[data]");
-
-        jTextField_serverPort.setText("40004");
-        jTextField_serverPort.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField_serverPortFocusLost(evt);
-            }
-        });
-
-        jTextField_serverIP.setText("192.168.1.75");
-        jTextField_serverIP.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField_serverIPFocusLost(evt);
-            }
-        });
-
-        jLabel6.setText("IP du serveur:");
-
-        jLabel7.setText("Port:");
-
-        jButton_Deconnexion.setText("Déconnexion");
-        jButton_Deconnexion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_DeconnexionActionPerformed(evt);
-            }
-        });
+        jLabel8.setText("Chariot");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Réservoir", "Convoyeur 1", "Bac KO", "Convoyeur 2" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -188,23 +162,14 @@ public class Petra_MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setText("Chariot");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(701, 701, 701))))
-                    .addGroup(layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel_actuateursLayout = new javax.swing.GroupLayout(jPanel_actuateurs);
+        jPanel_actuateurs.setLayout(jPanel_actuateursLayout);
+        jPanel_actuateursLayout.setHorizontalGroup(
+            jPanel_actuateursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_actuateursLayout.createSequentialGroup()
+                .addGroup(jPanel_actuateursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_actuateurs)
+                    .addGroup(jPanel_actuateursLayout.createSequentialGroup()
                         .addComponent(jRadioButtonConv1)
                         .addGap(18, 18, 18)
                         .addComponent(jRadioButtonConv2)
@@ -216,109 +181,233 @@ public class Petra_MainWindow extends javax.swing.JFrame {
                         .addComponent(jRadioButtonGrappin)
                         .addGap(15, 15, 15)
                         .addComponent(jRadioButtonBras)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel_actuateursLayout.setVerticalGroup(
+            jPanel_actuateursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_actuateursLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel_actuateurs)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel_actuateursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButtonConv1)
+                    .addComponent(jRadioButtonConv2)
+                    .addComponent(jRadioButtonPlongeur)
+                    .addComponent(jRadioButtonVentouse)
+                    .addComponent(jRadioButtonBras)
+                    .addComponent(jRadioButtonGrappin)
+                    .addGroup(jPanel_actuateursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        jLabel_capteurs.setText("Capteurs");
+
+        jCheckBox_L1.setText("L1");
+
+        jCheckBox_L2.setText("L2");
+
+        jCheckBox_T.setText("T");
+
+        jCheckBox_S.setText("S");
+
+        jCheckBox_CS.setText("CS");
+
+        jCheckBox_H.setText("H");
+
+        jCheckBox_AP.setText("AP");
+
+        jCheckBox_PP.setText("PP");
+
+        jCheckBox_DE.setText("DE");
+
+        javax.swing.GroupLayout jPanel_capteursLayout = new javax.swing.GroupLayout(jPanel_capteurs);
+        jPanel_capteurs.setLayout(jPanel_capteursLayout);
+        jPanel_capteursLayout.setHorizontalGroup(
+            jPanel_capteursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_capteursLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel_capteursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel_capteursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jCheckBox_L1)
+                        .addComponent(jCheckBox_T)
+                        .addComponent(jCheckBox_S)
+                        .addComponent(jCheckBox_CS)
+                        .addComponent(jCheckBox_H)
+                        .addComponent(jCheckBox_AP)
+                        .addComponent(jCheckBox_PP)
+                        .addComponent(jCheckBox_DE)
+                        .addComponent(jCheckBox_L2))
+                    .addComponent(jLabel_capteurs))
+                .addContainerGap(159, Short.MAX_VALUE))
+        );
+        jPanel_capteursLayout.setVerticalGroup(
+            jPanel_capteursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_capteursLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel_capteurs)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBox_L1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBox_L2)
+                .addGap(18, 18, 18)
+                .addComponent(jCheckBox_T)
+                .addGap(18, 18, 18)
+                .addComponent(jCheckBox_S)
+                .addGap(18, 18, 18)
+                .addComponent(jCheckBox_CS)
+                .addGap(18, 18, 18)
+                .addComponent(jCheckBox_H)
+                .addGap(18, 18, 18)
+                .addComponent(jCheckBox_AP)
+                .addGap(18, 18, 18)
+                .addComponent(jCheckBox_PP)
+                .addGap(18, 18, 18)
+                .addComponent(jCheckBox_DE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel_recutext.setText("Reçu:");
+
+        jLabel_envoyetext.setText("Envoyé:");
+
+        jLabel_recu.setText("[data]");
+
+        jLabel_envoye.setText("[data]");
+
+        jLabel6.setText("IP serveur:");
+
+        jTextField_serverIP.setText("192.168.1.75");
+        jTextField_serverIP.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField_serverIPFocusLost(evt);
+            }
+        });
+
+        jLabel7.setText("Port:");
+
+        jTextField_serverPort.setText("40004");
+        jTextField_serverPort.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField_serverPortFocusLost(evt);
+            }
+        });
+
+        jButton_connect.setText("Connexion au serveur");
+        jButton_connect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_connectActionPerformed(evt);
+            }
+        });
+
+        jButton_Deconnexion.setText("Déconnexion");
+        jButton_Deconnexion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_DeconnexionActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel_connectionLayout = new javax.swing.GroupLayout(jPanel_connection);
+        jPanel_connection.setLayout(jPanel_connectionLayout);
+        jPanel_connectionLayout.setHorizontalGroup(
+            jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_connectionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton_connect, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                    .addComponent(jButton_Deconnexion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_connectionLayout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_connectionLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(8, 8, 8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_connectionLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField_serverIP, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_serverPort, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
+            .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel_connectionLayout.createSequentialGroup()
+                    .addGap(28, 28, 28)
+                    .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel_recutext)
+                        .addComponent(jLabel_envoyetext)
+                        .addComponent(jLabel_recu)
+                        .addComponent(jLabel_envoye))
+                    .addContainerGap(164, Short.MAX_VALUE)))
+        );
+        jPanel_connectionLayout.setVerticalGroup(
+            jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_connectionLayout.createSequentialGroup()
+                .addContainerGap(128, Short.MAX_VALUE)
+                .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField_serverIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField_serverPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(18, 18, 18)
+                .addComponent(jButton_connect)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton_Deconnexion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel_connectionLayout.createSequentialGroup()
+                    .addGap(3, 3, 3)
+                    .addComponent(jLabel_recutext)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel_recu)
+                    .addGap(18, 18, 18)
+                    .addComponent(jLabel_envoyetext)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel_envoye)
+                    .addContainerGap(179, Short.MAX_VALUE)))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel_picture, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel_actuateurs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton_Deconnexion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonConnect, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
-                        .addGap(36, 36, 36))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox2)
-                                    .addComponent(jCheckBox3)
-                                    .addComponent(jCheckBox4)
-                                    .addComponent(jCheckBox5)
-                                    .addComponent(jCheckBox6)
-                                    .addComponent(jCheckBox7)
-                                    .addComponent(jCheckBox1)
-                                    .addComponent(jCheckBox9)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel_recu)
-                                    .addComponent(jLabel_envoye)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField_serverIP, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField_serverPort, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jPanel_capteurs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel_connection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBox3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBox4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBox5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBox6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBox7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBox1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBox9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1)
+                        .addComponent(jPanel_picture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel_recu)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel_envoye)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_serverIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_serverPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonConnect)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_Deconnexion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel_actuateurs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
+                        .addComponent(jPanel_capteurs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButtonConv1)
-                            .addComponent(jRadioButtonConv2)
-                            .addComponent(jRadioButtonPlongeur)
-                            .addComponent(jRadioButtonVentouse)
-                            .addComponent(jRadioButtonBras)
-                            .addComponent(jRadioButtonGrappin)
-                            .addComponent(jLabel8)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(33, Short.MAX_VALUE))
+                        .addComponent(jPanel_connection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectActionPerformed
+    private void jButton_connectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_connectActionPerformed
         try
         {
             cliSock = new Socket(IP, port);
@@ -334,7 +423,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
         {
             System.err.println("Erreur ! Pas de connexion ? [" + e + "]");
         } 
-    }//GEN-LAST:event_jButtonConnectActionPerformed
+    }//GEN-LAST:event_jButton_connectActionPerformed
 
     private void jRadioButtonConv1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonConv1ActionPerformed
         try
@@ -509,27 +598,32 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButtonConnect;
     private javax.swing.JButton jButton_Deconnexion;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox9;
+    private javax.swing.JButton jButton_connect;
+    private javax.swing.JCheckBox jCheckBox_AP;
+    private javax.swing.JCheckBox jCheckBox_CS;
+    private javax.swing.JCheckBox jCheckBox_DE;
+    private javax.swing.JCheckBox jCheckBox_H;
+    private javax.swing.JCheckBox jCheckBox_L1;
+    private javax.swing.JCheckBox jCheckBox_L2;
+    private javax.swing.JCheckBox jCheckBox_PP;
+    private javax.swing.JCheckBox jCheckBox_S;
+    private javax.swing.JCheckBox jCheckBox_T;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel_actuateurs;
+    private javax.swing.JLabel jLabel_capteurs;
     private javax.swing.JLabel jLabel_envoye;
+    private javax.swing.JLabel jLabel_envoyetext;
+    private javax.swing.JLabel jLabel_petra;
     private javax.swing.JLabel jLabel_recu;
+    private javax.swing.JLabel jLabel_recutext;
+    private javax.swing.JPanel jPanel_actuateurs;
+    private javax.swing.JPanel jPanel_capteurs;
+    private javax.swing.JPanel jPanel_connection;
+    private javax.swing.JPanel jPanel_picture;
     private javax.swing.JRadioButton jRadioButtonBras;
     private javax.swing.JRadioButton jRadioButtonConv1;
     private javax.swing.JRadioButton jRadioButtonConv2;
