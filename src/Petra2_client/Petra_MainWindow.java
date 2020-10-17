@@ -18,17 +18,18 @@ public class Petra_MainWindow extends javax.swing.JFrame {
     Socket cliSock = null; /* Initialisations indispensables */
     DataInputStream dis=null;
     DataOutputStream dos=null; 
-    String IP; int port;
+    String IP = "192.168.1.29"; int port = 40004;
+	//thread_Capteurs thread=null;
+	private Thread internalThread;
     
     /**
      * Creates new form Petra_MainWindow
      */
-    public Petra_MainWindow() {
+    public Petra_MainWindow() 
+	{
         initComponents();
         this.jLabel_recu.setText("");
         this.jLabel_envoye.setText("");
-        
-        // lancer le thread/bean des capteurs
     }
 
     /**
@@ -38,9 +39,11 @@ public class Petra_MainWindow extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup_capteurs = new javax.swing.ButtonGroup();
         jPanel_picture = new javax.swing.JPanel();
         jLabel_petra = new javax.swing.JLabel();
         jPanel_actuateurs = new javax.swing.JPanel();
@@ -107,48 +110,60 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 
         buttonGroup1.add(jRadioButtonConv1);
         jRadioButtonConv1.setText("Convoyeur 1");
-        jRadioButtonConv1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jRadioButtonConv1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jRadioButtonConv1ActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(jRadioButtonConv2);
         jRadioButtonConv2.setText("Convoyeur 2");
-        jRadioButtonConv2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jRadioButtonConv2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jRadioButtonConv2ActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(jRadioButtonPlongeur);
         jRadioButtonPlongeur.setText("Plongeur");
-        jRadioButtonPlongeur.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jRadioButtonPlongeur.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jRadioButtonPlongeurActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(jRadioButtonVentouse);
         jRadioButtonVentouse.setText("Ventouse");
-        jRadioButtonVentouse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jRadioButtonVentouse.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jRadioButtonVentouseActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(jRadioButtonBras);
         jRadioButtonBras.setText("Bras");
-        jRadioButtonBras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jRadioButtonBras.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jRadioButtonBrasActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(jRadioButtonGrappin);
         jRadioButtonGrappin.setText("Grappin");
-        jRadioButtonGrappin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jRadioButtonGrappin.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jRadioButtonGrappinActionPerformed(evt);
             }
         });
@@ -156,8 +171,10 @@ public class Petra_MainWindow extends javax.swing.JFrame {
         jLabel8.setText("Chariot");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Réservoir", "Convoyeur 1", "Bac KO", "Convoyeur 2" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jComboBox1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jComboBox1ActionPerformed(evt);
             }
         });
@@ -193,37 +210,47 @@ public class Petra_MainWindow extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel_actuateurs)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_actuateursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButtonConv1)
-                    .addComponent(jRadioButtonConv2)
-                    .addComponent(jRadioButtonPlongeur)
-                    .addComponent(jRadioButtonVentouse)
-                    .addComponent(jRadioButtonBras)
-                    .addComponent(jRadioButtonGrappin)
+                .addGroup(jPanel_actuateursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_actuateursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_actuateursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jRadioButtonConv1)
+                        .addComponent(jRadioButtonConv2)
+                        .addComponent(jRadioButtonPlongeur)
+                        .addComponent(jRadioButtonVentouse)
+                        .addComponent(jRadioButtonBras)
+                        .addComponent(jRadioButtonGrappin)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jLabel_capteurs.setText("Capteurs");
 
+        buttonGroup_capteurs.add(jCheckBox_L1);
         jCheckBox_L1.setText("L1");
 
+        buttonGroup_capteurs.add(jCheckBox_L2);
         jCheckBox_L2.setText("L2");
 
+        buttonGroup_capteurs.add(jCheckBox_T);
         jCheckBox_T.setText("T");
 
+        buttonGroup_capteurs.add(jCheckBox_S);
         jCheckBox_S.setText("S");
 
+        buttonGroup_capteurs.add(jCheckBox_CS);
         jCheckBox_CS.setText("CS");
 
+        buttonGroup_capteurs.add(jCheckBox_H);
         jCheckBox_H.setText("H");
 
+        buttonGroup_capteurs.add(jCheckBox_AP);
         jCheckBox_AP.setText("AP");
 
+        buttonGroup_capteurs.add(jCheckBox_PP);
         jCheckBox_PP.setText("PP");
 
+        buttonGroup_capteurs.add(jCheckBox_DE);
         jCheckBox_DE.setText("DE");
 
         javax.swing.GroupLayout jPanel_capteursLayout = new javax.swing.GroupLayout(jPanel_capteurs);
@@ -282,9 +309,11 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 
         jLabel6.setText("IP serveur:");
 
-        jTextField_serverIP.setText("192.168.1.75");
-        jTextField_serverIP.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
+        jTextField_serverIP.setText("192.168.1.29");
+        jTextField_serverIP.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
                 jTextField_serverIPFocusLost(evt);
             }
         });
@@ -292,22 +321,28 @@ public class Petra_MainWindow extends javax.swing.JFrame {
         jLabel7.setText("Port:");
 
         jTextField_serverPort.setText("40004");
-        jTextField_serverPort.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
+        jTextField_serverPort.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
                 jTextField_serverPortFocusLost(evt);
             }
         });
 
         jButton_connect.setText("Connexion au serveur");
-        jButton_connect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton_connect.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton_connectActionPerformed(evt);
             }
         });
 
         jButton_Deconnexion.setText("Déconnexion");
-        jButton_Deconnexion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton_Deconnexion.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton_DeconnexionActionPerformed(evt);
             }
         });
@@ -329,7 +364,6 @@ public class Petra_MainWindow extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addGap(8, 8, 8))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_connectionLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -414,6 +448,24 @@ public class Petra_MainWindow extends javax.swing.JFrame {
             System.out.println(cliSock.getInetAddress().toString());
             dis = new DataInputStream(cliSock.getInputStream());
             dos = new DataOutputStream(cliSock.getOutputStream());
+			//thread = new thread_Capteurs(dis); thread.start();
+			// lancer le thread/bean des capteurs
+			Runnable r = new Runnable()
+			{
+				public void run()
+				{
+					try
+					{
+						runWork();
+					}
+					catch (Exception e)
+					{
+						System.err.println(e.getMessage());
+					}
+				}
+			};
+			internalThread = new Thread(r, "Thread capteurs");
+			internalThread.start();
         }
         catch (UnknownHostException e)
         {
@@ -519,6 +571,11 @@ public class Petra_MainWindow extends javax.swing.JFrame {
         try
         {
             sendMsg(0);
+			internalThread.interrupt();
+			dis.close();
+			dos.close();
+			cliSock.close();
+			internalThread.stop();
         }
         catch(Exception e)
         {
@@ -562,6 +619,71 @@ public class Petra_MainWindow extends javax.swing.JFrame {
         }
     }
     
+	private void runWork()
+	{
+		byte capteur, old_value = 0;
+		
+		System.out.println("Démarrage thread...");
+		while(true)
+		{
+			try
+			{
+				capteur = dis.readByte();
+				System.out.println("Recu: " + capteur);
+				if(capteur != old_value)
+				{
+					this.buttonGroup_capteurs.clearSelection();
+					switch(capteur)
+					{
+						case 0:
+							System.out.println("L1");
+							this.jCheckBox_L1.setSelected(true);
+							break;
+						case 1:
+							System.out.println("L2");
+							this.jCheckBox_L2.setSelected(true);
+							break;
+						case 2:
+							System.out.println("T - Epaisseur");
+							this.jCheckBox_T.setSelected(true);
+							break;
+						case 3:
+							System.out.println("S - Slot");
+							this.jCheckBox_L1.setSelected(true);
+							break;
+						case 4:
+							System.out.println("CS - Chariot Stable");
+							this.jCheckBox_L1.setSelected(true);
+							break;
+						case 5:
+							System.out.println("AP - Bras");
+							this.jCheckBox_AP.setSelected(true);
+							break;
+						case 6:
+							System.out.println("PP - Plongeur");
+							this.jCheckBox_PP.setSelected(true);
+							break;
+						case 7:
+							System.out.println("DE - Bac d'entrée");
+							this.jCheckBox_DE.setSelected(true);
+							break;
+						default:
+							break;
+					}
+					old_value = capteur;
+				}
+			}
+			catch (IOException e) 
+			{
+				System.err.println("readByte Error: " + e.getMessage());
+			}
+			catch (Exception e)
+			{
+				System.err.println("readByte Error: " + e.getMessage());
+			}
+		}
+	}
+	
     /**
      * @param args the command line arguments
      */
@@ -598,6 +720,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup_capteurs;
     private javax.swing.JButton jButton_Deconnexion;
     private javax.swing.JButton jButton_connect;
     private javax.swing.JCheckBox jCheckBox_AP;

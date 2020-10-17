@@ -4,6 +4,8 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup_capteurs">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -140,16 +142,18 @@
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Component id="jLabel_actuateurs" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jRadioButtonConv1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonConv2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonPlongeur" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonVentouse" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonBras" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButtonGrappin" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jRadioButtonConv1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonConv2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonPlongeur" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonVentouse" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonBras" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonGrappin" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="17" max="32767" attributes="0"/>
@@ -315,46 +319,73 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_L1">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="buttonGroup_capteurs"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="L1"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_L2">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="buttonGroup_capteurs"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="L2"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_T">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="buttonGroup_capteurs"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="T"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_S">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="buttonGroup_capteurs"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="S"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_CS">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="buttonGroup_capteurs"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="CS"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_H">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="buttonGroup_capteurs"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="H"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_AP">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="buttonGroup_capteurs"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="AP"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_PP">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="buttonGroup_capteurs"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="PP"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox_DE">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="buttonGroup_capteurs"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="DE"/>
           </Properties>
         </Component>
@@ -381,7 +412,6 @@
                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       </Group>
@@ -468,7 +498,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField_serverIP">
           <Properties>
-            <Property name="text" type="java.lang.String" value="192.168.1.75"/>
+            <Property name="text" type="java.lang.String" value="192.168.1.29"/>
           </Properties>
           <Events>
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextField_serverIPFocusLost"/>
