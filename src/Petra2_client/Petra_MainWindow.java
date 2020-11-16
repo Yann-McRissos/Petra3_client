@@ -7,7 +7,8 @@ package Petra2_client;
 
 import java.net.*;
 import java.io.*;
-import java.util.Arrays;
+import static java.lang.Thread.sleep;
+import java.util.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,12 +30,12 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 	 * Creates new form Petra_MainWindow
 	 */
 	public Petra_MainWindow() {
-		initComponents();
-		this.setResizable(false);
-		this.setLocationRelativeTo(null);
-		this.jLabel_recu.setText("");
-		this.jLabel_envoye.setText("");
-		this.jLabel_arm_up.setVisible(false);
+            initComponents();
+            this.setResizable(false);
+            this.setLocationRelativeTo(null);
+            this.jLabel_recu.setText("");
+            this.jLabel_envoye.setText("");
+            this.jLabel_arm_up.setVisible(false);
 	}
 
 	/**	 * This method is called from within the constructor to initialize the form.
@@ -67,6 +68,8 @@ public class Petra_MainWindow extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jPanel_connection = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jLabel_recutext = new javax.swing.JLabel();
         jLabel_envoyetext = new javax.swing.JLabel();
         jLabel_recu = new javax.swing.JLabel();
@@ -77,6 +80,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
         jTextField_serverPort = new javax.swing.JTextField();
         jButton_connect = new javax.swing.JButton();
         jButton_Deconnexion = new javax.swing.JButton();
+        jButton_Envoyer = new javax.swing.JButton();
         jCheckBox_L2 = new javax.swing.JCheckBox();
         jCheckBox_L1 = new javax.swing.JCheckBox();
         jCheckBox_H = new javax.swing.JCheckBox();
@@ -277,6 +281,10 @@ public class Petra_MainWindow extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
         jLabel_recutext.setText("Reçu:");
 
         jLabel_envoyetext.setText("Envoyé:");
@@ -287,7 +295,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 
         jLabel6.setText("IP serveur:");
 
-        jTextField_serverIP.setText("192.168.1.75");
+        jTextField_serverIP.setText("10.59.40.64");
         jTextField_serverIP.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextField_serverIPFocusLost(evt);
@@ -317,49 +325,60 @@ public class Petra_MainWindow extends javax.swing.JFrame {
             }
         });
 
+        jButton_Envoyer.setText("Envoyer");
+        jButton_Envoyer.setActionCommand("EnvoyerButton");
+        jButton_Envoyer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_EnvoyerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel_connectionLayout = new javax.swing.GroupLayout(jPanel_connection);
         jPanel_connection.setLayout(jPanel_connectionLayout);
         jPanel_connectionLayout.setHorizontalGroup(
             jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_connectionLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_connectionLayout.createSequentialGroup()
+                .addContainerGap(60, Short.MAX_VALUE)
                 .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_connectionLayout.createSequentialGroup()
-                        .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton_connect, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                            .addComponent(jButton_Deconnexion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_connectionLayout.createSequentialGroup()
-                        .addGap(0, 14, Short.MAX_VALUE)
                         .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_connectionLayout.createSequentialGroup()
-                                .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_connectionLayout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                                    .addGroup(jPanel_connectionLayout.createSequentialGroup()
-                                        .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel_recutext)
-                                                .addComponent(jLabel_recu))
-                                            .addComponent(jLabel6))
-                                        .addGap(8, 8, 8)))
-                                .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField_serverIP, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField_serverPort, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(19, 19, 19))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_connectionLayout.createSequentialGroup()
-                                .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel_envoyetext)
-                                    .addComponent(jLabel_envoye))
-                                .addGap(33, 33, 33))))))
+                            .addComponent(jLabel_recutext)
+                            .addComponent(jLabel_recu))
+                        .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel_connectionLayout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField_serverIP, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel_connectionLayout.createSequentialGroup()
+                                .addGap(69, 69, 69)
+                                .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton_Envoyer)
+                                    .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel_envoyetext)
+                                        .addComponent(jLabel_envoye))))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_connectionLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_serverPort, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButton_connect, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton_Deconnexion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(71, 71, 71))
         );
         jPanel_connectionLayout.setVerticalGroup(
             jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_connectionLayout.createSequentialGroup()
-                .addContainerGap(484, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton_Envoyer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(jPanel_connectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_connectionLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_connectionLayout.createSequentialGroup()
                         .addComponent(jLabel_envoyetext)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel_envoye))
@@ -430,29 +449,29 @@ public class Petra_MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_connectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_connectActionPerformed
-		try {
-			cliSock = new Socket(IP, port);
-			System.out.println(cliSock.getInetAddress().toString());
-			dis = new DataInputStream(cliSock.getInputStream());
-			dos = new DataOutputStream(cliSock.getOutputStream());
-			//thread = new thread_Capteurs(dis); thread.start();
-			// lancer le thread/bean des capteurs
-			Runnable r = new Runnable() {
-				public void run() {
-					try {
-						runWork();
-					} catch (Exception e) {
-						System.err.println(e.getMessage());
-					}
-				}
-			};
-			internalThread = new Thread(r, "Thread capteurs");
-			internalThread.start();
-		} catch (UnknownHostException e) {
-			System.err.println("Erreur ! Host non trouvé [" + e + "]");
-		} catch (IOException e) {
-			System.err.println("Erreur ! Pas de connexion ? [" + e + "]");
-		}
+        try {
+                cliSock = new Socket(IP, port);
+                System.out.println(cliSock.getInetAddress().toString());
+                dis = new DataInputStream(cliSock.getInputStream());
+                dos = new DataOutputStream(cliSock.getOutputStream());
+                //thread = new thread_Capteurs(dis); thread.start();
+                // lancer le thread/bean des capteurs
+                Runnable r = new Runnable() {
+                        public void run() {
+                                try {
+                                        runWork();
+                                } catch (Exception e) {
+                                        System.err.println(e.getMessage());
+                                }
+                        }
+                };
+                internalThread = new Thread(r, "Thread capteurs");
+                internalThread.start();
+        } catch (UnknownHostException e) {
+                System.err.println("Erreur ! Host non trouvé [" + e + "]");
+        } catch (IOException e) {
+                System.err.println("Erreur ! Pas de connexion ? [" + e + "]");
+        }
     }//GEN-LAST:event_jButton_connectActionPerformed
 
     private void jRadioButtonConv1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonConv1ActionPerformed
@@ -559,6 +578,100 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 			System.err.println("Erreur ! Pas de connexion ? [" + e.getMessage() + "]");
 		}
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton_EnvoyerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EnvoyerActionPerformed
+        StringTokenizer words = new StringTokenizer(jTextArea1.getText(), " .=;");
+        boolean flag_if = false;
+        String word;
+        
+        for(int i=0 ; words.hasMoreTokens() ; i++)
+        {
+            try
+            {
+                word = words.nextToken();
+                switch(word)
+                {
+                    case "IF": flag_if = true; break;
+                    case "ENDIF": flag_if = false; break;
+                    case "C1":
+                        if(words.nextToken() == "ON")
+                            sendMsg(1);
+                        if(words.nextToken() == "OFF")
+                            sendMsg(1);
+                        else
+                            System.out.println("Commande inconnue: " + word);
+                        break;
+                    case "C2":
+                        if(words.nextToken() == "ON")
+                            sendMsg(2);
+                        if(words.nextToken() == "OFF")
+                            sendMsg(2);
+                        else
+                            System.out.println("Commande inconnue: " + word);
+                        break;
+                    case "PLONGEUR":
+                        if(words.nextToken() == "ON")
+                            sendMsg(4);
+                        if(words.nextToken() == "OFF")
+                            sendMsg(4);
+                        else
+                            System.out.println("Commande inconnue: " + word);
+                        break;
+                    case "VENTOUSE":
+                        if(words.nextToken() == "ON")
+                            sendMsg(3);
+                        if(words.nextToken() == "OFF")
+                            sendMsg(3);
+                        else
+                            System.out.println("Commande inconnue: " + word);
+                        break;
+                    case "GRAPPIN":
+                        if(words.nextToken() == "ON")
+                            sendMsg(5);
+                        if(words.nextToken() == "OFF")
+                            sendMsg(5);
+                        else
+                            System.out.println("Commande inconnue: " + word);
+                        break;
+                    case "BRAS":
+                        if(words.nextToken() == "ON")
+                            sendMsg(6);
+                        if(words.nextToken() == "OFF")
+                            sendMsg(6);
+                        else
+                            System.out.println("Commande inconnue: " + word);
+                        break;
+                    case "CHARIOT": 
+                        switch(words.nextToken())
+                        {
+                            // Réservoir, Convoyeur 1, Bac KO, Convoyeur 2
+                            case "RE":
+                                sendMsg(7);
+                                break;
+                            case "C1":
+                                sendMsg(8);
+                                break;
+                            case "KO":
+                                sendMsg(9);
+                                break;
+                            case "C2":
+                                sendMsg(10);
+                                break;
+                        }
+                        break;
+                    case "TIMEOUT":
+                        sleep(Integer.parseInt(words.nextToken()));
+                        break;
+                    default: System.out.println("Commande inconnue: " + word); break;
+                }
+            }
+            catch (Exception e)
+            {
+                System.err.println("Erreur: " + e.getMessage());
+            }
+        }
+
+    }//GEN-LAST:event_jButton_EnvoyerActionPerformed
 
 	public void sendMsg(int num)
 	{
@@ -692,6 +805,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup_capteurs;
     private javax.swing.JButton jButton_Deconnexion;
+    private javax.swing.JButton jButton_Envoyer;
     private javax.swing.JButton jButton_connect;
     private javax.swing.JCheckBox jCheckBox_CS;
     private javax.swing.JCheckBox jCheckBox_DE;
@@ -722,6 +836,8 @@ public class Petra_MainWindow extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButtonGrappin;
     private javax.swing.JRadioButton jRadioButtonPlongeur;
     private javax.swing.JRadioButton jRadioButtonVentouse;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField_serverIP;
     private javax.swing.JTextField jTextField_serverPort;
     // End of variables declaration//GEN-END:variables
