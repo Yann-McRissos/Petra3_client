@@ -9,6 +9,7 @@ import java.net.*;
 import java.io.*;
 import static java.lang.Thread.sleep;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 
 /**
@@ -580,99 +581,136 @@ public class Petra_MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton_EnvoyerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EnvoyerActionPerformed
-        StringTokenizer words = new StringTokenizer(jTextArea1.getText(), " .=;");
+        //StringTokenizer words = new StringTokenizer(jTextArea1.getText(), " .=;\n");
+		String str = jTextArea1.getText();
+		String[] words = str.split("\\W+");
         boolean flag_if = false;
         String word;
-        
-        for(int i=0 ; words.hasMoreTokens() ; i++)
-        {
-            try
-            {
-                word = words.nextToken();
-                switch(word)
-                {
-                    case "IF": flag_if = true; break;
-                    case "ENDIF": flag_if = false; break;
-                    case "C1":
-                        if(words.nextToken() == "ON")
-                            sendMsg(1);
-                        if(words.nextToken() == "OFF")
-                            sendMsg(1);
-                        else
-                            System.out.println("Commande inconnue: " + word);
-                        break;
-                    case "C2":
-                        if(words.nextToken() == "ON")
-                            sendMsg(2);
-                        if(words.nextToken() == "OFF")
-                            sendMsg(2);
-                        else
-                            System.out.println("Commande inconnue: " + word);
-                        break;
-                    case "PLONGEUR":
-                        if(words.nextToken() == "ON")
-                            sendMsg(4);
-                        if(words.nextToken() == "OFF")
-                            sendMsg(4);
-                        else
-                            System.out.println("Commande inconnue: " + word);
-                        break;
-                    case "VENTOUSE":
-                        if(words.nextToken() == "ON")
-                            sendMsg(3);
-                        if(words.nextToken() == "OFF")
-                            sendMsg(3);
-                        else
-                            System.out.println("Commande inconnue: " + word);
-                        break;
-                    case "GRAPPIN":
-                        if(words.nextToken() == "ON")
-                            sendMsg(5);
-                        if(words.nextToken() == "OFF")
-                            sendMsg(5);
-                        else
-                            System.out.println("Commande inconnue: " + word);
-                        break;
-                    case "BRAS":
-                        if(words.nextToken() == "ON")
-                            sendMsg(6);
-                        if(words.nextToken() == "OFF")
-                            sendMsg(6);
-                        else
-                            System.out.println("Commande inconnue: " + word);
-                        break;
-                    case "CHARIOT": 
-                        switch(words.nextToken())
-                        {
-                            // Réservoir, Convoyeur 1, Bac KO, Convoyeur 2
-                            case "RE":
-                                sendMsg(7);
-                                break;
-                            case "C1":
-                                sendMsg(8);
-                                break;
-                            case "KO":
-                                sendMsg(9);
-                                break;
-                            case "C2":
-                                sendMsg(10);
-                                break;
-                        }
-                        break;
-                    case "TIMEOUT":
-                        sleep(Integer.parseInt(words.nextToken()));
-                        break;
-                    default: System.out.println("Commande inconnue: " + word); break;
-                }
-            }
-            catch (Exception e)
-            {
-                System.err.println("Erreur: " + e.getMessage());
-            }
-        }
+		
+		for(int i=0; i < words.length ; i++)
+		{
+			try
+			{
+			words[i] = words[i].trim();
+			//System.out.println("words["+i+"] = " + words[i]);
+			//System.out.println("words[i+1] = " + words[i+1]);
+			//System.out.println("words[i+1].equals(ON) = " + words[i+1].equals("ON"));
+			    
+			analyseCommand(words, i);
+			}
+			catch (Exception e)
+			{
+				System.out.println("megaerror: " + e.getMessage());
+			}
+			i++;
 
+		}
     }//GEN-LAST:event_jButton_EnvoyerActionPerformed
 
+	public void analyseCommand(String[] words, int i) throws InterruptedException
+	{
+		switch(words[i])
+			{
+				case "TIMEOUT":
+					System.out.println("TIMEOUT");
+					TimeUnit.SECONDS.sleep(Integer.parseInt(words[i+1].trim()));
+					break;
+				case "C1":
+					System.out.println("C1");
+					if(words[i+1].equals("ON"))
+						sendMsg(1);
+					else
+					{
+						if(words[i+1].equals("OFF"))
+					        sendMsg(1);
+						else
+						    System.err.println("Commande inconnue: " + words[i+1]);
+					}
+					break;
+				case "C2":
+					System.out.println("C2");
+					if(words[i+1].equals("ON"))
+						sendMsg(2);
+					else
+					{
+						if(words[i+1].equals("OFF"))
+					        sendMsg(2);
+						else
+						    System.err.println("Commande inconnue: " + words[i+1]);
+					}
+					break;
+				case "PLONGEUR":
+					System.out.println("PLONGEUR");
+					if(words[i+1].equals("ON"))
+						sendMsg(4);
+					else
+					{
+						if(words[i+1].equals("OFF"))
+					        sendMsg(4);
+						else
+						    System.err.println("Commande inconnue: " + words[i+1]);
+					}
+					break;
+				case "VENTOUSE":
+					System.out.println("VENTOUSE");
+					if(words[i+1].equals("ON"))
+						sendMsg(3);
+					else
+					{
+						if(words[i+1].equals("OFF"))
+					        sendMsg(3);
+						else
+						    System.err.println("Commande inconnue: " + words[i+1]);
+					}
+					break;
+				case "GRAPPIN":
+					System.out.println("GRAPPIN");
+					if(words[i+1].equals("ON"))
+						sendMsg(5);
+					else
+					{
+						if(words[i+1].equals("OFF"))
+					        sendMsg(5);
+						else
+						    System.err.println("Commande inconnue: " + words[i+1]);
+					}
+					break;
+				case "BRAS":
+					System.out.println("BRAS");
+					if(words[i+1].equals("ON"))
+						sendMsg(6);
+					else
+					{
+						if(words[i+1].equals("OFF"))
+					        sendMsg(6);
+						else
+						    System.err.println("Commande inconnue: " + words[i+1]);
+					}
+					break;
+				case "CHARIOT":
+					System.out.println("CHARIOT");
+					switch(words[i+1])
+					{
+						// Réservoir, Convoyeur 1, Bac KO, Convoyeur 2
+                        case "RE":
+                            sendMsg(7);
+                            break;
+                        case "C1":
+                            sendMsg(8);
+                            break;
+                        case "KO":
+                            sendMsg(9);
+                            break;
+                        case "C2":
+                            sendMsg(10);
+                            break;
+						default: System.out.println("Commande inconnue: " + words[i+1]);
+					}					
+					break;
+				default: System.err.println("Mot inconnu: " + words[i]); break;
+			}
+	}
+	
 	public void sendMsg(int num)
 	{
 		try 
