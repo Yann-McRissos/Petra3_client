@@ -5,6 +5,7 @@
  */
 package Petra2_client;
 
+import ClassLibrary.*;
 import java.net.*;
 import java.io.*;
 import static java.lang.Thread.sleep;
@@ -26,6 +27,16 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 	int port = 40004;
 	//thread_Capteurs thread=null;
 	private Thread internalThread;
+	
+	Actuateurs act = new Actuateurs();
+	Capteurs cap = new Capteurs();
+	
+	// variables du lexer
+	boolean flag_if = false;
+	boolean flag_else = false;
+	boolean flag_loop = false;
+	boolean condition_checked = false;
+	int loop_index;
 
 	/**
 	 * Creates new form Petra_MainWindow
@@ -583,133 +594,448 @@ public class Petra_MainWindow extends javax.swing.JFrame {
     private void jButton_EnvoyerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EnvoyerActionPerformed
         //StringTokenizer words = new StringTokenizer(jTextArea1.getText(), " .=;\n");
 		String str = jTextArea1.getText();
-		String[] words = str.split("\\W+");
-        boolean flag_if = false;
+		String[] words = str.split(" \\s\\n");
         String word;
 		
 		for(int i=0; i < words.length ; i++)
 		{
+			/*
+				trouver un moyen de sauter et revenir à certaines lignes
+				Retourner le numéro d'index avec la fonction d'analyse ? (requiert un paramètre supplémentaire)
+				Retenir le numéro d'index dans cette fonction ?
+				Après un if, on check la condition, si faux on saute au else ou la fin du if (celui qui vient en premier)
+				Pour un loop, quand la condition n'est plus respectée il suffit d'ignorer toutes les lignes jusqu'à arriver au endloop 
+				ou alors de sauter à la ligne endloop en ayant retenu son index
+			*/
 			try
 			{
-			words[i] = words[i].trim();
-			//System.out.println("words["+i+"] = " + words[i]);
-			//System.out.println("words[i+1] = " + words[i+1]);
-			//System.out.println("words[i+1].equals(ON) = " + words[i+1].equals("ON"));
-			    
-			analyseCommand(words, i);
+				words[i] = words[i].trim();
+				//System.out.println("words["+i+"] = " + words[i]);
+				//System.out.println("words[i+1] = " + words[i+1]);
+				//System.out.println("words[i].equals(ON) = " + words[i].equals("ON"));
+
+				if(flag_if)
+				{
+					if(condition_checked)
+						analyseCommand(words, i);
+					else
+					{
+						if(analyseCondition(words, i))
+							condition_checked = true;
+						else // condition pas respectée, on saute jusqu'au else ou fin de condition
+						{
+							while(i < words.length)
+							{
+								if(words[i].equals("ELSE"))
+									break;
+								if(words[i].equals("ENDIF"))
+								{
+									flag_if = false;
+									condition_checked = false;
+									break;
+								}
+								i++;
+							}
+						}
+					}
+				}
+				else
+				{
+					if(flag_loop)	// boucle
+					{
+						if(words[i].equals("ENDLOOP"))	// si fin boucle
+						{
+							i = loop_index;
+							condition_checked = false;
+						}
+						else	// sinon, corps boucle
+						{
+							if(condition_checked)
+							{
+								analyseCommand(words, i);
+							}
+							else
+							{
+								if(analyseCondition(words, i))
+								{
+									loop_index = i-1;
+									condition_checked = true;
+								}
+								else // condition pas respectée, on saute jusqu'a la fin d'itération
+								{
+									while(i < words.length)
+									{
+										if(words[i].equals("ENDLOOP"))
+										{
+											flag_loop = false;
+											condition_checked = false;
+											break;
+										}
+										i++;
+									}
+								}
+							}
+						}
+					}
+					else // situation normale, pas de conditions ou d'itérations
+						analyseCommand(words, i);
+				}
 			}
 			catch (Exception e)
 			{
 				System.out.println("megaerror: " + e.getMessage());
 			}
-			i++;
-
 		}
     }//GEN-LAST:event_jButton_EnvoyerActionPerformed
 
-	public void analyseCommand(String[] words, int i) throws InterruptedException
+	public int analyseCommand(String[] words, int i) throws InterruptedException
 	{
 		switch(words[i])
-			{
-				case "TIMEOUT":
-					System.out.println("TIMEOUT");
-					TimeUnit.SECONDS.sleep(Integer.parseInt(words[i+1].trim()));
-					break;
-				case "C1":
-					System.out.println("C1");
-					if(words[i+1].equals("ON"))
-						sendMsg(1);
-					else
+		{
+			case "TIMEOUT":
+				System.out.println("TIMEOUT");
+				TimeUnit.SECONDS.sleep(Integer.parseInt(words[i+1].trim()));
+				break;
+			case "IF":
+				System.out.println("IF");
+				flag_if = true;
+				return 1;
+			case "ELSE":
+				System.out.println("ELSE");
+				flag_else = true;
+				return 2;
+			case "ENDIF":
+				System.out.println("ENDIF");
+				flag_if = false;
+				flag_else = false;
+				return 3;
+			case "LOOP":
+				System.out.println("LOOP");
+				flag_loop = true;
+				return 4;
+			case "ENDLOOP":
+				System.out.println("ENDLOOP");
+				flag_loop = false;
+				return 5;
+			case "C1":
+				System.out.println("C1");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					act.setC1(true);
+					sendMsg(1);
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
 					{
-						if(words[i+1].equals("OFF"))
-					        sendMsg(1);
-						else
-						    System.err.println("Commande inconnue: " + words[i+1]);
+						act.setC1(false);
+						sendMsg(10);
 					}
-					break;
-				case "C2":
-					System.out.println("C2");
-					if(words[i+1].equals("ON"))
-						sendMsg(2);
 					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "C2":
+				System.out.println("C2");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					act.setC2(true);
+					sendMsg(2);
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
 					{
-						if(words[i+1].equals("OFF"))
-					        sendMsg(2);
-						else
-						    System.err.println("Commande inconnue: " + words[i+1]);
+						act.setC2(false);
+						sendMsg(20);
 					}
-					break;
-				case "PLONGEUR":
-					System.out.println("PLONGEUR");
-					if(words[i+1].equals("ON"))
-						sendMsg(4);
 					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "VENTOUSE":
+				System.out.println("VENTOUSE");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					act.setVENTOUSE(true);
+					sendMsg(3);
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
 					{
-						if(words[i+1].equals("OFF"))
-					        sendMsg(4);
-						else
-						    System.err.println("Commande inconnue: " + words[i+1]);
+						act.setVENTOUSE(false);
+						sendMsg(30);
 					}
-					break;
-				case "VENTOUSE":
-					System.out.println("VENTOUSE");
-					if(words[i+1].equals("ON"))
-						sendMsg(3);
 					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "PLONGEUR":
+				System.out.println("PLONGEUR");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					act.setPLONGEUR(true);
+					sendMsg(4);
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
 					{
-						if(words[i+1].equals("OFF"))
-					        sendMsg(3);
-						else
-						    System.err.println("Commande inconnue: " + words[i+1]);
+						act.setPLONGEUR(false);
+						sendMsg(40);
 					}
-					break;
-				case "GRAPPIN":
-					System.out.println("GRAPPIN");
-					if(words[i+1].equals("ON"))
-						sendMsg(5);
 					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "BRAS":
+				System.out.println("BRAS");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					act.setGRAPPIN(true);
+					sendMsg(5);
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
 					{
-						if(words[i+1].equals("OFF"))
-					        sendMsg(5);
-						else
-						    System.err.println("Commande inconnue: " + words[i+1]);
+						act.setGRAPPIN(false);
+						sendMsg(50);
 					}
-					break;
-				case "BRAS":
-					System.out.println("BRAS");
-					if(words[i+1].equals("ON"))
-						sendMsg(6);
 					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "GRAPPIN":
+				System.out.println("GRAPPIN");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					act.setGRAPPIN(true);
+					sendMsg(6);
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
 					{
-						if(words[i+1].equals("OFF"))
-					        sendMsg(6);
-						else
-						    System.err.println("Commande inconnue: " + words[i+1]);
+						act.setGRAPPIN(false);
+						sendMsg(60);
 					}
-					break;
-				case "CHARIOT":
-					System.out.println("CHARIOT");
-					switch(words[i+1])
-					{
-						// Réservoir, Convoyeur 1, Bac KO, Convoyeur 2
-                        case "RE":
-                            sendMsg(7);
-                            break;
-                        case "C1":
-                            sendMsg(8);
-                            break;
-                        case "KO":
-                            sendMsg(9);
-                            break;
-                        case "C2":
-                            sendMsg(10);
-                            break;
-						default: System.out.println("Commande inconnue: " + words[i+1]);
-					}					
-					break;
-				default: System.err.println("Mot inconnu: " + words[i]); break;
-			}
+					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "CHARIOT":
+				System.out.println("CHARIOT");
+				i++;
+				switch(words[i])
+				{
+					// Réservoir, Convoyeur 1, Bac KO, Convoyeur 2
+					case "RE":
+						act.setCHARIOT(act.BACENTREE);
+						sendMsg(act.BACENTREE);
+						break;
+					case "C1":
+						act.setCHARIOT(act.CONV1);
+						sendMsg(act.CONV1);
+						break;
+					case "KO":
+						act.setCHARIOT(act.BACKO);
+						sendMsg(act.BACKO);
+						break;
+					case "C2":
+						act.setCHARIOT(act.CONV2);
+						sendMsg(act.CONV2);
+						break;
+					default: System.out.println("Commande inconnue: " + words[i+1]); break;
+				}					
+				break;
+			default: System.err.println("Mot inconnu: " + words[i]); break;
+		}
+		return 0;
 	}
+	
+	public boolean analyseCondition(String[] words, int i)
+	{
+		switch(words[i])
+		{
+			case "C1":
+				System.out.println("C1");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					if(act.isC1())
+						return true;
+					else
+						return false;
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
+					{
+						if(act.isC1())
+							return false;
+						else
+							return true;
+					}
+					else
+					System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "C2":
+				System.out.println("C2");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					if(act.isC2())
+						return true;
+					else
+						return false;
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
+					{
+						if(act.isC2())
+							return false;
+						else
+							return true;
+					}
+					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "PLONGEUR":
+				System.out.println("PLONGEUR");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					if(act.isPLONGEUR())
+						return true;
+					else
+						return false;
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
+					{
+						if(act.isPLONGEUR())
+							return false;
+						else
+							return true;
+					}
+					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "VENTOUSE":
+				System.out.println("VENTOUSE");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					if(act.isVENTOUSE())
+						return true;
+					else
+						return false;
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
+					{
+						if(act.isVENTOUSE())
+							return false;
+						else
+							return true;
+					}
+					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "BRAS":
+				System.out.println("BRAS");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					if(act.isBRAS())
+						return true;
+					else
+						return false;
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
+					{
+						if(act.isBRAS())
+							return false;
+						else
+							return true;
+					}
+					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "GRAPPIN":
+				System.out.println("GRAPPIN");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					if(act.isGRAPPIN())
+						return true;
+					else
+						return false;
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
+					{
+						if(act.isGRAPPIN())
+							return false;
+						else
+							return true;
+					}
+					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "CHARIOT":
+				System.out.println("CHARIOT");
+				i++;
+				switch(words[i])
+				{
+					// Réservoir, Convoyeur 1, Bac KO, Convoyeur 2
+					case "RE":
+						if(act.getCHARIOT() == act.BACENTREE)
+							return true;
+						else
+							return false;
+					case "C1":
+						if(act.getCHARIOT() == act.CONV1)
+							return true;
+						else
+							return false;
+					case "KO":
+						if(act.getCHARIOT() == act.BACKO)
+							return true;
+						else
+							return false;
+					case "C2":
+						if(act.getCHARIOT() == act.CONV2)
+							return true;
+						else
+							return false;
+					default: System.out.println("Commande inconnue: " + words[i+1]); break;
+				}					
+				break;
+			default: System.err.println("Mot inconnu: " + words[i]); break;
+		}
+		return false;
+	}		
 	
 	public void sendMsg(int num)
 	{
