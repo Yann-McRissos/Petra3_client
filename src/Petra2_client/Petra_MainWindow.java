@@ -35,19 +35,24 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 	boolean flag_if = false;
 	boolean flag_else = false;
 	boolean flag_loop = false;
-	boolean condition_checked = false;
+	boolean checked_if = false;
+	boolean checked_loop = false;
+	boolean condition_if = false;
+	boolean condition_loop = false;
 	int loop_index;
 
 	/**
 	 * Creates new form Petra_MainWindow
 	 */
 	public Petra_MainWindow() {
-            initComponents();
-            this.setResizable(false);
-            this.setLocationRelativeTo(null);
-            this.jLabel_recu.setText("");
-            this.jLabel_envoye.setText("");
-            this.jLabel_arm_up.setVisible(false);
+		initComponents();
+		this.setResizable(false);
+		this.setLocationRelativeTo(null);
+		this.jLabel_recu.setText("");
+		this.jLabel_envoye.setText("");
+		this.jLabel_arm_up.setVisible(false);
+
+		IP = this.jTextField_serverIP.getText();
 	}
 
 	/**	 * This method is called from within the constructor to initialize the form.
@@ -56,7 +61,8 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 	 */
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup_capteurs = new javax.swing.ButtonGroup();
@@ -193,48 +199,60 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 
         buttonGroup1.add(jRadioButtonConv1);
         jRadioButtonConv1.setText("Convoyeur 1");
-        jRadioButtonConv1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jRadioButtonConv1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jRadioButtonConv1ActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(jRadioButtonConv2);
         jRadioButtonConv2.setText("Convoyeur 2");
-        jRadioButtonConv2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jRadioButtonConv2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jRadioButtonConv2ActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(jRadioButtonPlongeur);
         jRadioButtonPlongeur.setText("Plongeur");
-        jRadioButtonPlongeur.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jRadioButtonPlongeur.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jRadioButtonPlongeurActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(jRadioButtonVentouse);
         jRadioButtonVentouse.setText("Ventouse");
-        jRadioButtonVentouse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jRadioButtonVentouse.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jRadioButtonVentouseActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(jRadioButtonBras);
         jRadioButtonBras.setText("Bras");
-        jRadioButtonBras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jRadioButtonBras.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jRadioButtonBrasActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(jRadioButtonGrappin);
         jRadioButtonGrappin.setText("Grappin");
-        jRadioButtonGrappin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jRadioButtonGrappin.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jRadioButtonGrappinActionPerformed(evt);
             }
         });
@@ -242,8 +260,10 @@ public class Petra_MainWindow extends javax.swing.JFrame {
         jLabel8.setText("Chariot");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Réservoir", "Convoyeur 1", "Bac KO", "Convoyeur 2" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jComboBox1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jComboBox1ActionPerformed(evt);
             }
         });
@@ -295,6 +315,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        jTextArea1.setText("IF C1 ON\n\tC1 OFF\nELSE\n\tC1 ON\nENDIF\n\nPLONGEUR ON");
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabel_recutext.setText("Reçu:");
@@ -307,9 +328,11 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 
         jLabel6.setText("IP serveur:");
 
-        jTextField_serverIP.setText("10.59.40.64");
-        jTextField_serverIP.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
+        jTextField_serverIP.setText("192.168.1.75");
+        jTextField_serverIP.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
                 jTextField_serverIPFocusLost(evt);
             }
         });
@@ -317,30 +340,38 @@ public class Petra_MainWindow extends javax.swing.JFrame {
         jLabel7.setText("Port:");
 
         jTextField_serverPort.setText("40004");
-        jTextField_serverPort.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
+        jTextField_serverPort.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
                 jTextField_serverPortFocusLost(evt);
             }
         });
 
         jButton_connect.setText("Connexion au serveur");
-        jButton_connect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton_connect.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton_connectActionPerformed(evt);
             }
         });
 
         jButton_Deconnexion.setText("Déconnexion");
-        jButton_Deconnexion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton_Deconnexion.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton_DeconnexionActionPerformed(evt);
             }
         });
 
         jButton_Envoyer.setText("Envoyer");
         jButton_Envoyer.setActionCommand("EnvoyerButton");
-        jButton_Envoyer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton_Envoyer.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton_EnvoyerActionPerformed(evt);
             }
         });
@@ -591,51 +622,115 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+	/*
+		trouver un moyen de sauter et revenir à certaines lignes
+		Retourner le numéro d'index avec la fonction d'analyse ? (requiert un paramètre supplémentaire)
+		Retenir le numéro d'index dans cette fonction ?
+		Après un if, on check la condition, si faux on saute au else ou la fin du if (celui qui vient en premier)
+		Pour un loop, quand la condition n'est plus respectée il suffit d'ignorer toutes les lignes jusqu'à arriver au endloop 
+		ou alors de sauter à la ligne endloop en ayant retenu son index
+	*/
     private void jButton_EnvoyerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EnvoyerActionPerformed
         //StringTokenizer words = new StringTokenizer(jTextArea1.getText(), " .=;\n");
 		String str = jTextArea1.getText();
-		String[] words = str.split(" \\s\\n");
+		StringTokenizer st = new StringTokenizer(str, " \n");
+		String[] words = new String[st.countTokens()];
         String word;
 		
+		System.out.println("Filling array...");
+		for(int i=0;st.hasMoreTokens() ; i++)
+		{
+			words[i] = st.nextToken();
+			words[i] = words[i].trim();
+			System.out.println(i + " - " + words[i]);
+		}
+		System.out.println("Array filled !");
+		
+		System.out.println("Starting lexical analysis...");
 		for(int i=0; i < words.length ; i++)
 		{
-			/*
-				trouver un moyen de sauter et revenir à certaines lignes
-				Retourner le numéro d'index avec la fonction d'analyse ? (requiert un paramètre supplémentaire)
-				Retenir le numéro d'index dans cette fonction ?
-				Après un if, on check la condition, si faux on saute au else ou la fin du if (celui qui vient en premier)
-				Pour un loop, quand la condition n'est plus respectée il suffit d'ignorer toutes les lignes jusqu'à arriver au endloop 
-				ou alors de sauter à la ligne endloop en ayant retenu son index
-			*/
 			try
 			{
-				words[i] = words[i].trim();
-				//System.out.println("words["+i+"] = " + words[i]);
-				//System.out.println("words[i+1] = " + words[i+1]);
-				//System.out.println("words[i].equals(ON) = " + words[i].equals("ON"));
-
+				TimeUnit.SECONDS.sleep(2);
+				System.out.println("\n##############################################");
+				System.out.println("Analyzing word "+i+" = "+words[i]);
+				System.out.println("FLAG IF = " + String.valueOf(flag_if));
+				System.out.println("FLAG ELSE = " + String.valueOf(flag_else));
+				System.out.println("FLAG LOOP = " + String.valueOf(flag_loop));
+				System.out.println("IF CHECKED = " + String.valueOf(checked_if));
+				System.out.println("IF CONDITION = " + String.valueOf(condition_if));
+				System.out.println("LOOP CHECKED = " + String.valueOf(checked_loop));
+				System.out.println("LOOP CONDITION = " + String.valueOf(condition_loop));
+				System.out.println("");
+				TimeUnit.SECONDS.sleep(1);
 				if(flag_if)
 				{
-					if(condition_checked)
-						analyseCommand(words, i);
-					else
+					System.out.println("IF block, condition checked = " + String.valueOf(checked_if));
+					if(checked_if)
 					{
-						if(analyseCondition(words, i))
-							condition_checked = true;
-						else // condition pas respectée, on saute jusqu'au else ou fin de condition
+						System.out.println("\tcondition has already been checked and is = " + String.valueOf(condition_if));
+						if(words[i].equals("ELSE"))	// si arrivé à la fin de la condition d'un IF
 						{
+							System.out.println("\tHIT ELSE, SKIPPING...");
+							checked_if = false;
+							condition_if = false;
 							while(i < words.length)
 							{
-								if(words[i].equals("ELSE"))
-									break;
 								if(words[i].equals("ENDIF"))
 								{
+									System.out.println("\t Hit ENDIF");
 									flag_if = false;
-									condition_checked = false;
+									condition_if = false;
 									break;
 								}
 								i++;
 							}
+							System.out.println("\tlines skipped, index = " + i);
+						}
+						if(words[i].equals("ENDIF"))	// si fin boucle
+						{
+							System.out.println("\tHIT END OF CONDITION, JUMPING OUT");
+							flag_if = false;
+							checked_if = false;
+							condition_if = false;
+						}
+						else	// sinon, corps boucle
+						{
+							System.out.println("\tcommand");
+							analyseCommand(words, i);
+						}
+					}
+					else
+					{
+						System.out.println("\tchecking condition...");
+						if(analyseCondition(words, i))
+						{
+							checked_if = true;
+							condition_if = true;
+							System.out.println("\tcondition is " + String.valueOf(condition_if));
+						}
+						else // condition pas respectée, on saute jusqu'au else ou fin de condition
+						{
+							checked_if = true;
+							System.out.println("\tcondition is " + String.valueOf(condition_if) + ", skipping...");
+							while(i < words.length)
+							{
+								if(words[i].equals("ELSE"))
+								{
+									System.out.println("\t Hit ELSE");
+									break;
+								}
+								if(words[i].equals("ENDIF"))
+								{
+									System.out.println("\t Hit ENDIF");
+									flag_if = false;
+									checked_if = false;
+									condition_if = false;
+									break;
+								}
+								i++;
+							}
+							System.out.println("\tlines skipped, index = " + i);
 						}
 					}
 				}
@@ -643,42 +738,57 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				{
 					if(flag_loop)	// boucle
 					{
-						if(words[i].equals("ENDLOOP"))	// si fin boucle
+						System.out.println("LOOP bloc, condition checked = " + String.valueOf(checked_loop)+ " - Loop index = " + loop_index);
+						if(checked_loop)
 						{
-							i = loop_index;
-							condition_checked = false;
-						}
-						else	// sinon, corps boucle
-						{
-							if(condition_checked)
+							System.out.println("\tcondition has already been checked and is = " + String.valueOf(condition_loop));
+							if(words[i].equals("ENDLOOP"))	// si fin boucle
 							{
+								System.out.println("\tHIT THE END OF THE LOOP, LOOPING BACK...");
+								i = loop_index;
+								checked_loop = false;
+							}
+							else	// sinon, corps boucle
+							{
+								System.out.print("\tcommand: ");
 								analyseCommand(words, i);
 							}
-							else
+						}
+						else
+						{
+							System.out.println("\tchecking condition...");
+							if(analyseCondition(words, i))
 							{
-								if(analyseCondition(words, i))
+								loop_index = i-1;
+								checked_loop = true;
+								condition_loop = true;
+								System.out.println("\tcondition is " + String.valueOf(condition_loop)+" - loop index = " + loop_index);
+							}
+							else // condition pas respectée, on saute jusqu'a la fin d'itération
+							{
+								checked_loop = true;
+								System.out.println("\tcondition is " + String.valueOf(condition_loop) + ", skipping...");
+								while(i < words.length)
 								{
-									loop_index = i-1;
-									condition_checked = true;
-								}
-								else // condition pas respectée, on saute jusqu'a la fin d'itération
-								{
-									while(i < words.length)
+									if(words[i].equals("ENDLOOP"))
 									{
-										if(words[i].equals("ENDLOOP"))
-										{
-											flag_loop = false;
-											condition_checked = false;
-											break;
-										}
-										i++;
+										System.out.println("END OF THE LOOP");
+										flag_loop = false;
+										condition_loop = false;
+										checked_loop = false;
+										break;
 									}
+									i++;
 								}
+								System.out.println("\tlines skipped, index = " + i);
 							}
 						}
 					}
 					else // situation normale, pas de conditions ou d'itérations
+					{
+						System.out.print("Executing: ");
 						analyseCommand(words, i);
+					}
 				}
 			}
 			catch (Exception e)
@@ -686,6 +796,8 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				System.out.println("megaerror: " + e.getMessage());
 			}
 		}
+		System.out.println("\nEnd of file");
+		System.out.println("Lexical analysis completed !");
     }//GEN-LAST:event_jButton_EnvoyerActionPerformed
 
 	public int analyseCommand(String[] words, int i) throws InterruptedException
@@ -718,10 +830,11 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				flag_loop = false;
 				return 5;
 			case "C1":
-				System.out.println("C1");
+				System.out.print("C1");
 				i++;
 				if(words[i].equals("ON"))
 				{
+					System.out.println(" ON");
 					act.setC1(true);
 					sendMsg(1);
 				}
@@ -729,6 +842,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				{
 					if(words[i].equals("OFF"))
 					{
+						System.out.println(" OFF");
 						act.setC1(false);
 						sendMsg(10);
 					}
@@ -737,10 +851,11 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				}
 				break;
 			case "C2":
-				System.out.println("C2");
+				System.out.print("C2");
 				i++;
 				if(words[i].equals("ON"))
 				{
+					System.out.println(" ON");
 					act.setC2(true);
 					sendMsg(2);
 				}
@@ -748,6 +863,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				{
 					if(words[i].equals("OFF"))
 					{
+						System.out.println(" OFF");
 						act.setC2(false);
 						sendMsg(20);
 					}
@@ -756,10 +872,11 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				}
 				break;
 			case "VENTOUSE":
-				System.out.println("VENTOUSE");
+				System.out.print("VENTOUSE");
 				i++;
 				if(words[i].equals("ON"))
 				{
+					System.out.println(" ON");
 					act.setVENTOUSE(true);
 					sendMsg(3);
 				}
@@ -767,6 +884,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				{
 					if(words[i].equals("OFF"))
 					{
+						System.out.println(" OFF");
 						act.setVENTOUSE(false);
 						sendMsg(30);
 					}
@@ -775,10 +893,11 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				}
 				break;
 			case "PLONGEUR":
-				System.out.println("PLONGEUR");
+				System.out.print("PLONGEUR");
 				i++;
 				if(words[i].equals("ON"))
 				{
+					System.out.println(" ON");
 					act.setPLONGEUR(true);
 					sendMsg(4);
 				}
@@ -786,6 +905,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				{
 					if(words[i].equals("OFF"))
 					{
+						System.out.println(" OFF");
 						act.setPLONGEUR(false);
 						sendMsg(40);
 					}
@@ -794,10 +914,11 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				}
 				break;
 			case "BRAS":
-				System.out.println("BRAS");
+				System.out.print("BRAS");
 				i++;
 				if(words[i].equals("ON"))
 				{
+					System.out.println(" ON");
 					act.setGRAPPIN(true);
 					sendMsg(5);
 				}
@@ -805,6 +926,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				{
 					if(words[i].equals("OFF"))
 					{
+						System.out.println(" OFF");
 						act.setGRAPPIN(false);
 						sendMsg(50);
 					}
@@ -813,10 +935,11 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				}
 				break;
 			case "GRAPPIN":
-				System.out.println("GRAPPIN");
+				System.out.print("GRAPPIN");
 				i++;
 				if(words[i].equals("ON"))
 				{
+					System.out.println(" ON");
 					act.setGRAPPIN(true);
 					sendMsg(6);
 				}
@@ -824,6 +947,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				{
 					if(words[i].equals("OFF"))
 					{
+						System.out.println(" OFF");
 						act.setGRAPPIN(false);
 						sendMsg(60);
 					}
@@ -832,26 +956,30 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				}
 				break;
 			case "CHARIOT":
-				System.out.println("CHARIOT");
+				System.out.print("CHARIOT");
 				i++;
 				switch(words[i])
 				{
 					// Réservoir, Convoyeur 1, Bac KO, Convoyeur 2
 					case "RE":
-						act.setCHARIOT(act.BACENTREE);
-						sendMsg(act.BACENTREE);
+						System.out.println(" BAC D'ENTREE");
+						act.setCHARIOT(act.getBACENTREE());
+						sendMsg(act.getBACENTREE());
 						break;
 					case "C1":
-						act.setCHARIOT(act.CONV1);
-						sendMsg(act.CONV1);
+						System.out.println(" CONV1");
+						act.setCHARIOT(act.getCONV1());
+						sendMsg(act.getCONV1());
 						break;
 					case "KO":
-						act.setCHARIOT(act.BACKO);
-						sendMsg(act.BACKO);
+						System.out.println(" BACK KO");
+						act.setCHARIOT(act.getBACKO());
+						sendMsg(act.getBACKO());
 						break;
 					case "C2":
-						act.setCHARIOT(act.CONV2);
-						sendMsg(act.CONV2);
+						System.out.println(" CONV2");
+						act.setCHARIOT(act.getCONV2());
+						sendMsg(act.getCONV2());
 						break;
 					default: System.out.println("Commande inconnue: " + words[i+1]); break;
 				}					
@@ -1010,22 +1138,22 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				{
 					// Réservoir, Convoyeur 1, Bac KO, Convoyeur 2
 					case "RE":
-						if(act.getCHARIOT() == act.BACENTREE)
+						if(act.getCHARIOT() == act.getBACENTREE())
 							return true;
 						else
 							return false;
 					case "C1":
-						if(act.getCHARIOT() == act.CONV1)
+						if(act.getCHARIOT() == act.getCONV1())
 							return true;
 						else
 							return false;
 					case "KO":
-						if(act.getCHARIOT() == act.BACKO)
+						if(act.getCHARIOT() == act.getBACKO())
 							return true;
 						else
 							return false;
 					case "C2":
-						if(act.getCHARIOT() == act.CONV2)
+						if(act.getCHARIOT() == act.getCONV2())
 							return true;
 						else
 							return false;
@@ -1077,48 +1205,86 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 							jCheckBox_DE.setSelected(false);
 							jLabel_arm.setVisible(true);
 							jLabel_arm_up.setVisible(false);
+							cap.setAP(false);
+							cap.setCS(false);
+							cap.setDE(false);
+							cap.setH(false);
+							cap.setL1(false);
+							cap.setL2(false);
+							cap.setPP(false);
+							cap.setS(false);
+							cap.setT(false);
 							break;
 						case 1:
 							System.out.println("L1");
 							this.jCheckBox_L1.setSelected(true);
+							cap.setL1(true);
 							break;
 						case 2:
 							System.out.println("L2");
 							this.jCheckBox_L2.setSelected(true);
+							cap.setL2(true);
 							break;
 						case 3:
 							System.out.println("L1 et L2");
 							this.jCheckBox_L1.setSelected(true);
 							this.jCheckBox_L2.setSelected(true);
+							cap.setL1(true);
+							cap.setL2(true);
 							break;
 						case 4:
 							System.out.println("H");
 							this.jCheckBox_H.setSelected(true);
+							cap.setH(true);
 							break;
 						case 8:
 							System.out.println("S - Slot");
 							this.jCheckBox_S.setSelected(true);
+							cap.setS(true);
 							break;
 						case 16:
 							System.out.println("Chariot instable (en mouvement)");
 							this.jCheckBox_CS.setSelected(true);
+							cap.setCS(true);
 							break;
 						case 32:
 							System.out.println("Bras/arbre - Convoyeur 2");
 							//jCheckBox_AP.setSelected(true);
 							this.jLabel_arm.setVisible(false);
 							this.jLabel_arm_up.setVisible(true);
+							cap.setAP(true);
 							break;
 						case 64:
 							System.out.println("Plongeur - position basse");
 							jCheckBox_PP.setSelected(true);
+							cap.setPP(true);
 							break;
 						case (byte) 128:
 							System.out.println("Bac d'entrée vide");
 							jCheckBox_DE.setSelected(true);
+							cap.setDE(true);
 							break;
 						default:
 							System.out.println("???");
+							// reset les capteurs
+							jCheckBox_L1.setSelected(false);
+							jCheckBox_L2.setSelected(false);
+							jCheckBox_H.setSelected(false);
+							jCheckBox_S.setSelected(false);
+							jCheckBox_CS.setSelected(false);
+							jCheckBox_PP.setSelected(false);
+							jCheckBox_DE.setSelected(false);
+							jLabel_arm.setVisible(true);
+							jLabel_arm_up.setVisible(false);
+							cap.setAP(false);
+							cap.setCS(false);
+							cap.setDE(false);
+							cap.setH(false);
+							cap.setL1(false);
+							cap.setL2(false);
+							cap.setPP(false);
+							cap.setS(false);
+							cap.setT(false);
 							break;
 					}
 					old_value = capteur;
