@@ -2,17 +2,31 @@ package ClassLibrary;
 
 public class Capteurs {
 
-    private boolean L1 = false;
-    private boolean L2 = false;
-    private boolean T = false;
-    private boolean S = false;
-    private boolean AP = false;
-    private boolean PP = false;
-    private boolean DE = false;
-    private  boolean CS = false;
+    private boolean L1;
+    private boolean L2;
+    private boolean T;	// broken
+    private boolean S;
+    private boolean CS;	// chariot stable
+    private boolean AP;	// bras
+    private boolean PP;	// plongeur
+    private boolean DE;	// bac d'entrée
+	private boolean H;
 
     public Capteurs() {
     }
+	
+	public void setEverythingOff()
+	{
+		setL1(false);
+		setL2(false);
+		setT(false);
+		setS(false);
+		setCS(false);
+		setAP(false);
+		setPP(false);
+		setDE(false);
+		setH(false);
+	}
 
     public boolean getL1() {
         return L1;
@@ -76,5 +90,13 @@ public class Capteurs {
 
     public void setCS(boolean CS) {
         this.CS = CS;
+    }
+	
+	public boolean getH() {
+        return H;
+    }
+
+    public void setH(boolean H) {
+        this.H = H;
     }
 }

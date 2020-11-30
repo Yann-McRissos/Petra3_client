@@ -651,7 +651,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 		{
 			try
 			{
-				TimeUnit.SECONDS.sleep(2);
+				TimeUnit.SECONDS.sleep(1);
 				System.out.println("\n##############################################");
 				System.out.println("Analyzing word "+i+" = "+words[i]);
 				System.out.println("FLAG IF = " + String.valueOf(flag_if));
@@ -662,7 +662,6 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				System.out.println("LOOP CHECKED = " + String.valueOf(checked_loop));
 				System.out.println("LOOP CONDITION = " + String.valueOf(condition_loop));
 				System.out.println("");
-				TimeUnit.SECONDS.sleep(1);
 				if(flag_if)
 				{
 					System.out.println("IF block, condition checked = " + String.valueOf(checked_if));
@@ -717,12 +716,12 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 							{
 								if(words[i].equals("ELSE"))
 								{
-									System.out.println("\t Hit ELSE");
+									System.out.println("\tHit ELSE");
 									break;
 								}
 								if(words[i].equals("ENDIF"))
 								{
-									System.out.println("\t Hit ENDIF");
+									System.out.println("\tHit ENDIF");
 									flag_if = false;
 									checked_if = false;
 									condition_if = false;
@@ -798,6 +797,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 		}
 		System.out.println("\nEnd of file");
 		System.out.println("Lexical analysis completed !");
+		System.out.println("\n\n");
     }//GEN-LAST:event_jButton_EnvoyerActionPerformed
 
 	public int analyseCommand(String[] words, int i) throws InterruptedException
@@ -998,6 +998,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				i++;
 				if(words[i].equals("ON"))
 				{
+					System.out.println(" ON ?");
 					if(act.isC1())
 						return true;
 					else
@@ -1007,6 +1008,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				{
 					if(words[i].equals("OFF"))
 					{
+						System.out.println(" OFF ?");
 						if(act.isC1())
 							return false;
 						else
@@ -1021,6 +1023,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				i++;
 				if(words[i].equals("ON"))
 				{
+					System.out.println(" ON ?");
 					if(act.isC2())
 						return true;
 					else
@@ -1030,6 +1033,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				{
 					if(words[i].equals("OFF"))
 					{
+						System.out.println(" OFF ?");
 						if(act.isC2())
 							return false;
 						else
@@ -1044,6 +1048,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				i++;
 				if(words[i].equals("ON"))
 				{
+					System.out.println(" ON ?");
 					if(act.isPLONGEUR())
 						return true;
 					else
@@ -1053,6 +1058,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				{
 					if(words[i].equals("OFF"))
 					{
+						System.out.println(" OFF ?");
 						if(act.isPLONGEUR())
 							return false;
 						else
@@ -1067,6 +1073,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				i++;
 				if(words[i].equals("ON"))
 				{
+					System.out.println(" ON ?");
 					if(act.isVENTOUSE())
 						return true;
 					else
@@ -1076,6 +1083,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				{
 					if(words[i].equals("OFF"))
 					{
+						System.out.println(" OFF ?");
 						if(act.isVENTOUSE())
 							return false;
 						else
@@ -1090,6 +1098,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				i++;
 				if(words[i].equals("ON"))
 				{
+					System.out.println(" ON ?");
 					if(act.isBRAS())
 						return true;
 					else
@@ -1099,6 +1108,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				{
 					if(words[i].equals("OFF"))
 					{
+						System.out.println(" OFF ?");
 						if(act.isBRAS())
 							return false;
 						else
@@ -1113,6 +1123,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				i++;
 				if(words[i].equals("ON"))
 				{
+					System.out.println(" ON ?");
 					if(act.isGRAPPIN())
 						return true;
 					else
@@ -1122,6 +1133,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				{
 					if(words[i].equals("OFF"))
 					{
+						System.out.println(" OFF ?");
 						if(act.isGRAPPIN())
 							return false;
 						else
@@ -1138,27 +1150,257 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 				{
 					// Réservoir, Convoyeur 1, Bac KO, Convoyeur 2
 					case "RE":
+						System.out.println(" BAC D'ENTREE ?");
 						if(act.getCHARIOT() == act.getBACENTREE())
 							return true;
 						else
 							return false;
-					case "C1":
+					case "CONV1":
+						System.out.println(" CONV1 ?");
 						if(act.getCHARIOT() == act.getCONV1())
 							return true;
 						else
 							return false;
 					case "KO":
+						System.out.println(" BAC KO ?");
 						if(act.getCHARIOT() == act.getBACKO())
 							return true;
 						else
 							return false;
-					case "C2":
+					case "CONV2":
+						System.out.println(" CONV2 ?");
 						if(act.getCHARIOT() == act.getCONV2())
 							return true;
 						else
 							return false;
 					default: System.out.println("Commande inconnue: " + words[i+1]); break;
 				}					
+				break;
+			// ######################## CAPTEURS #############################
+			case "L1":
+				System.out.println("L1");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					System.out.println(" ON ?");
+					if(cap.getL1())
+						return true;
+					else
+						return false;
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
+					{
+						System.out.println(" OFF ?");
+						if(cap.getL1())
+							return false;
+						else
+							return true;
+					}
+					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "L2":
+				System.out.println("L2");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					System.out.println(" ON ?");
+					if(cap.getL2())
+						return true;
+					else
+						return false;
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
+					{
+						System.out.println(" OFF ?");
+						if(cap.getL2())
+							return false;
+						else
+							return true;
+					}
+					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "T":
+				System.out.println("T");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					System.out.println(" ON ?");
+					if(cap.getT())
+						return true;
+					else
+						return false;
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
+					{
+						System.out.println(" OFF ?");
+						if(cap.getT())
+							return false;
+						else
+							return true;
+					}
+					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "S":
+				System.out.println("S");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					System.out.println(" ON ?");
+					if(cap.getS())
+						return true;
+					else
+						return false;
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
+					{
+						System.out.println(" OFF ?");
+						if(cap.getS())
+							return false;
+						else
+							return true;
+					}
+					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "CS":
+				System.out.println("CS");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					System.out.println(" ON ?");
+					if(cap.getCS())
+						return true;
+					else
+						return false;
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
+					{
+						System.out.println(" OFF ?");
+						if(cap.getCS())
+							return false;
+						else
+							return true;
+					}
+					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "AP":
+				System.out.println("AP");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					System.out.println(" ON ?");
+					if(cap.getAP())
+						return true;
+					else
+						return false;
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
+					{
+						System.out.println(" OFF ?");
+						if(cap.getAP())
+							return false;
+						else
+							return true;
+					}
+					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "PP":
+				System.out.println("PP");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					System.out.println(" ON ?");
+					if(cap.getPP())
+						return true;
+					else
+						return false;
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
+					{
+						System.out.println(" OFF ?");
+						if(cap.getPP())
+							return false;
+						else
+							return true;
+					}
+					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "DE":
+				System.out.println("DE");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					System.out.println(" ON ?");
+					if(cap.getDE())
+						return true;
+					else
+						return false;
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
+					{
+						System.out.println(" OFF ?");
+						if(cap.getDE())
+							return false;
+						else
+							return true;
+					}
+					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
+				break;
+			case "H":
+				System.out.println("H");
+				i++;
+				if(words[i].equals("ON"))
+				{
+					System.out.println(" ON ?");
+					if(cap.getH())
+						return true;
+					else
+						return false;
+				}
+				else
+				{
+					if(words[i].equals("OFF"))
+					{
+						System.out.println(" OFF ?");
+						if(cap.getH())
+							return false;
+						else
+							return true;
+					}
+					else
+						System.err.println("Commande inconnue: " + words[i+1]);
+				}
 				break;
 			default: System.err.println("Mot inconnu: " + words[i]); break;
 		}
@@ -1205,46 +1447,44 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 							jCheckBox_DE.setSelected(false);
 							jLabel_arm.setVisible(true);
 							jLabel_arm_up.setVisible(false);
-							cap.setAP(false);
-							cap.setCS(false);
-							cap.setDE(false);
-							cap.setH(false);
-							cap.setL1(false);
-							cap.setL2(false);
-							cap.setPP(false);
-							cap.setS(false);
-							cap.setT(false);
+							cap.setEverythingOff();
 							break;
 						case 1:
 							System.out.println("L1");
 							this.jCheckBox_L1.setSelected(true);
+							cap.setEverythingOff();
 							cap.setL1(true);
 							break;
 						case 2:
 							System.out.println("L2");
 							this.jCheckBox_L2.setSelected(true);
+							cap.setEverythingOff();
 							cap.setL2(true);
 							break;
 						case 3:
 							System.out.println("L1 et L2");
 							this.jCheckBox_L1.setSelected(true);
 							this.jCheckBox_L2.setSelected(true);
+							cap.setEverythingOff();
 							cap.setL1(true);
 							cap.setL2(true);
 							break;
 						case 4:
 							System.out.println("H");
 							this.jCheckBox_H.setSelected(true);
+							cap.setEverythingOff();
 							cap.setH(true);
 							break;
 						case 8:
 							System.out.println("S - Slot");
 							this.jCheckBox_S.setSelected(true);
+							cap.setEverythingOff();
 							cap.setS(true);
 							break;
 						case 16:
 							System.out.println("Chariot instable (en mouvement)");
 							this.jCheckBox_CS.setSelected(true);
+							cap.setEverythingOff();
 							cap.setCS(true);
 							break;
 						case 32:
@@ -1252,16 +1492,19 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 							//jCheckBox_AP.setSelected(true);
 							this.jLabel_arm.setVisible(false);
 							this.jLabel_arm_up.setVisible(true);
+							cap.setEverythingOff();
 							cap.setAP(true);
 							break;
 						case 64:
 							System.out.println("Plongeur - position basse");
 							jCheckBox_PP.setSelected(true);
+							cap.setEverythingOff();
 							cap.setPP(true);
 							break;
 						case (byte) 128:
 							System.out.println("Bac d'entrée vide");
 							jCheckBox_DE.setSelected(true);
+							cap.setEverythingOff();
 							cap.setDE(true);
 							break;
 						default:
@@ -1276,15 +1519,7 @@ public class Petra_MainWindow extends javax.swing.JFrame {
 							jCheckBox_DE.setSelected(false);
 							jLabel_arm.setVisible(true);
 							jLabel_arm_up.setVisible(false);
-							cap.setAP(false);
-							cap.setCS(false);
-							cap.setDE(false);
-							cap.setH(false);
-							cap.setL1(false);
-							cap.setL2(false);
-							cap.setPP(false);
-							cap.setS(false);
-							cap.setT(false);
+							cap.setEverythingOff();
 							break;
 					}
 					old_value = capteur;

@@ -1,70 +1,131 @@
 package ClassLibrary;
 
-public class Actuateurs {
+public class Actuateurs 
+{
+	private static int BACENTREE = 11;
+	private static int CONV1 = 12;
+	private static int BACKO = 13;
+	private static int CONV2 = 14;
+	
+	private boolean C1;
+	private boolean C2;
+	private boolean VENTOUSE;
+	private boolean PLONGEUR;
+	private boolean BRAS;
+	private boolean GRAPPIN;
+	private int CHARIOT;
+	
+	public Actuateurs()
+	{
+	}
 
-    private int CP; //Chariot
-    private boolean C1 = false; //Conv1
-    private boolean C2 = false; //Conv2
-    private boolean PV = false; //Ventouse
-    private boolean PA = false; // Truc su le chariot
-    private boolean AA = false; // Grapin sur Arbre
+	public static int getBACENTREE()
+	{
+		return BACENTREE;
+	}
 
-    public Actuateurs() {
-    }
+	public static void setBACENTREE(int aBACENTREE)
+	{
+		BACENTREE = aBACENTREE;
+	}
 
-    public int getCP() {
-        return CP;
-    }
+	public static int getCONV1()
+	{
+		return CONV1;
+	}
 
-    public void setCP(int CP) {
+	public static void setCONV1(int aCONV1)
+	{
+		CONV1 = aCONV1;
+	}
 
-        if(CP >  0 || CP < 4)
-        {
-            System.out.println( CP + ": Valeur incorrecte");
-        }
-        else
-        {
-            this.CP = CP;
-        }
-    }
+	public static int getBACKO()
+	{
+		return BACKO;
+	}
 
-    public boolean getC1() {
-        return C1;
-    }
+	public static void setBACKO(int aBACKO)
+	{
+		BACKO = aBACKO;
+	}
 
-    public void setC1(boolean c1) {
-        C1 = c1;
-    }
+	public static int getCONV2()
+	{
+		return CONV2;
+	}
 
-    public boolean getC2() {
-        return C2;
-    }
+	public static void setCONV2(int aCONV2)
+	{
+		CONV2 = aCONV2;
+	}
 
-    public void setC2(boolean c2) {
-        C2 = c2;
-    }
+	public boolean isC1()
+	{
+		return C1;
+	}
 
-    public boolean getPV() {
-        return PV;
-    }
+	public void setC1(boolean C1)
+	{
+		this.C1 = C1;
+	}
 
-    public void setPV(boolean PV) {
-        this.PV = PV;
-    }
+	public boolean isC2()
+	{
+		return C2;
+	}
 
-    public boolean getPA() {
-        return PA;
-    }
+	public void setC2(boolean C2)
+	{
+		this.C2 = C2;
+	}
 
-    public void setPA(boolean PA) {
-        this.PA = PA;
-    }
+	public boolean isVENTOUSE()
+	{
+		return VENTOUSE;
+	}
 
-    public boolean getAA() {
-        return AA;
-    }
+	public void setVENTOUSE(boolean VENTOUSE)
+	{
+		this.VENTOUSE = VENTOUSE;
+	}
 
-    public void setAA(boolean AA) {
-        this.AA = AA;
-    }
+	public boolean isPLONGEUR()
+	{
+		return PLONGEUR;
+	}
+
+	public void setPLONGEUR(boolean PLONGEUR)
+	{
+		this.PLONGEUR = PLONGEUR;
+	}
+
+	public boolean isBRAS()
+	{
+		return BRAS;
+	}
+
+	public void setBRAS(boolean BRAS)
+	{
+		this.BRAS = BRAS;
+	}
+
+	public boolean isGRAPPIN()
+	{
+		return GRAPPIN;
+	}
+
+	public void setGRAPPIN(boolean GRAPPIN)
+	{
+		this.GRAPPIN = GRAPPIN;
+	}
+
+	public int getCHARIOT()
+	{
+		return CHARIOT;
+	}
+
+	public void setCHARIOT(int CHARIOT)
+	{
+		this.CHARIOT = CHARIOT;
+	}
 }
